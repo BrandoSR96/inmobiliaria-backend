@@ -6,7 +6,6 @@ import com.inmobiliaria.inmobiliaria_backend.model.Propiedad;
 import com.inmobiliaria.inmobiliaria_backend.repository.MultimediaRepository;
 import com.inmobiliaria.inmobiliaria_backend.repository.PropiedadRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

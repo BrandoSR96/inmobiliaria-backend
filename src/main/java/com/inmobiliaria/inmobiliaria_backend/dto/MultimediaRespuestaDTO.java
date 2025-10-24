@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class MultimediaRespuestaDTO {
     private Long id;
     private String url;
-    private String tipo; // e.g., "imagen", "video"
+    private String tipo;
 }

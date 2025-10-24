@@ -27,7 +27,7 @@ public class UsuarioMapper {
 
         List<PropiedadDTO> propiedades = usuario.getPropiedades() != null
                 ? usuario.getPropiedades().stream()
-                .map(propiedadMapper::toDTO) // ✅ Usa PropiedadDTO con multimedia
+                .map(propiedadMapper::toDTO)
                 .collect(Collectors.toList())
                 : null;
 
