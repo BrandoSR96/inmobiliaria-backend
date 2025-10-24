@@ -1,6 +1,5 @@
 package com.inmobiliaria.inmobiliaria_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.inmobiliaria.inmobiliaria_backend.config.PropiedadListener;
 import com.inmobiliaria.inmobiliaria_backend.enums.EstadoPropiedad;
 import com.inmobiliaria.inmobiliaria_backend.enums.TipoPropiedad;
@@ -10,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,15 +31,7 @@ public class Propiedad {
     private TipoPropiedad tipo;
     @Enumerated(EnumType.STRING)
     private EstadoPropiedad estado;
+    private String imagenUrl;
     private String servicios;
     private LocalDate fechaPublicacion;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @OneToMany(mappedBy = "propiedad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("propiedad") // evita recursividad infinita
-    private List<Multimedia> multimedia;
-
 }
