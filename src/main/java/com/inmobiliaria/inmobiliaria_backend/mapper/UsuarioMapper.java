@@ -52,7 +52,6 @@ public class UsuarioMapper {
         dto.setDistrito(propiedad.getDistrito());
         dto.setTipo(propiedad.getTipo());
         dto.setEstado(propiedad.getEstado());
-        dto.setImagenUrl(propiedad.getImagenUrl());
         dto.setServicios(propiedad.getServicios());
         dto.setFechaPublicacion(propiedad.getFechaPublicacion().toString());
         return dto;
@@ -69,7 +68,6 @@ public class UsuarioMapper {
         dto.setDistrito(propiedad.getDistrito());
         dto.setTipo(propiedad.getTipo());
         dto.setEstado(propiedad.getEstado());
-        dto.setImagenUrl(propiedad.getImagenUrl());
         dto.setServicios(propiedad.getServicios());
         dto.setFechaPublicacion(propiedad.getFechaPublicacion());
         return dto;

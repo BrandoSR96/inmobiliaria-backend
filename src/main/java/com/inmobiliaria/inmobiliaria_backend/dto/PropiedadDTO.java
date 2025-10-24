@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,13 +46,6 @@ public class PropiedadDTO {
     @NotNull(message = "El estado de la propiedad es obligatorio")
     private EstadoPropiedad estado;
 
-    @NotBlank(message = "La URL de la imagen es obligatoria")
-    @Pattern(
-            regexp = "^(http|https)://.*$",
-            message = "La URL de la imagen debe ser válida (debe comenzar con http o https)"
-    )
-    private String imagenUrl;
-
     @NotBlank(message = "Debe especificar los servicios (ejemplo: AGUA,LUZ,INTERNET)")
     @Size(max = 255, message = "Los servicios no deben exceder los 255 caracteres")
     private String servicios;
@@ -58,5 +53,8 @@ public class PropiedadDTO {
     private String fechaPublicacion;
 
     private UsuarioResumenDTO usuario;
+
+    private List<MultimediaRespuestaDTO> multimedia;
+
 
 }

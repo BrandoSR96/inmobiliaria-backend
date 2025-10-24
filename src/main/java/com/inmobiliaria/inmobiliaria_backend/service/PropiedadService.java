@@ -56,7 +56,6 @@ public class PropiedadService {
         propiedad.setDistrito(dto.getDistrito());
         propiedad.setTipo(dto.getTipo());
         propiedad.setEstado(dto.getEstado());
-        propiedad.setImagenUrl(dto.getImagenUrl());
         propiedad.setServicios(dto.getServicios());
 
         Propiedad actualizada = propiedadRepository.save(propiedad);
