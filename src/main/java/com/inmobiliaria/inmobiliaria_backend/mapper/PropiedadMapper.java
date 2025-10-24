@@ -1,7 +1,6 @@
 package com.inmobiliaria.inmobiliaria_backend.mapper;
 
 import com.inmobiliaria.inmobiliaria_backend.dto.PropiedadDTO;
-import com.inmobiliaria.inmobiliaria_backend.dto.UsuarioDTO;
 import com.inmobiliaria.inmobiliaria_backend.model.Propiedad;
 import com.inmobiliaria.inmobiliaria_backend.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;

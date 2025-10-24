@@ -41,7 +41,7 @@ public class Propiedad {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "propiedad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("propiedad") // evita recursividad infinita
+    @JsonIgnoreProperties("propiedad")
     private List<Multimedia> multimedia;
 
 }

@@ -1,10 +1,8 @@
 package com.inmobiliaria.inmobiliaria_backend.dto;
 
 import com.inmobiliaria.inmobiliaria_backend.enums.Rol;
-import com.inmobiliaria.inmobiliaria_backend.mapper.PropiedadResumenDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +27,6 @@ public class UsuarioDTO {
     private String password;
 
     private Rol rol;
-    private List<PropiedadResumenDTO> propiedades;
+    private List<PropiedadDTO> propiedades;
 
 }
