@@ -1,7 +1,5 @@
-package com.inmobiliaria.inmobiliaria_backend.model;
+package com.inmobiliaria.inmobiliaria_backend.mapper;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.inmobiliaria.inmobiliaria_backend.config.PropiedadListener;
 import com.inmobiliaria.inmobiliaria_backend.enums.EstadoPropiedad;
 import com.inmobiliaria.inmobiliaria_backend.enums.TipoPropiedad;
 import jakarta.persistence.*;
@@ -14,11 +12,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@EntityListeners(PropiedadListener.class)
-@Table(name = "propiedad")
-public class Propiedad {
-
+public class PropiedadResumenDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,8 +29,4 @@ public class Propiedad {
     private String imagenUrl;
     private String servicios;
     private LocalDate fechaPublicacion;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
 }

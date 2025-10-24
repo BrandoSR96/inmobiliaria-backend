@@ -2,6 +2,7 @@ package com.inmobiliaria.inmobiliaria_backend.dto;
 
 import com.inmobiliaria.inmobiliaria_backend.enums.EstadoPropiedad;
 import com.inmobiliaria.inmobiliaria_backend.enums.TipoPropiedad;
+import com.inmobiliaria.inmobiliaria_backend.mapper.UsuarioResumenDTO;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PropiedadDTO {
-
     private Long id;
 
     @NotBlank(message = "El título es obligatorio")
@@ -56,4 +56,7 @@ public class PropiedadDTO {
     private String servicios;
 
     private String fechaPublicacion;
+
+    private UsuarioResumenDTO usuario;
+
 }
