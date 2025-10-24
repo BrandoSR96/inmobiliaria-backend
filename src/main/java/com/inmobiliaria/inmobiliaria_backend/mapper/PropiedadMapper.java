@@ -1,11 +1,20 @@
 package com.inmobiliaria.inmobiliaria_backend.mapper;
 
 import com.inmobiliaria.inmobiliaria_backend.dto.PropiedadDTO;
+import com.inmobiliaria.inmobiliaria_backend.dto.UsuarioDTO;
 import com.inmobiliaria.inmobiliaria_backend.model.Propiedad;
+import com.inmobiliaria.inmobiliaria_backend.model.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class PropiedadMapper {
+
+    @Autowired
+    private MultimediaMapper multimediaMapper;
+
     public Propiedad toEntity(PropiedadDTO dto) {
         if (dto == null) return null;
 
@@ -19,8 +28,16 @@ public class PropiedadMapper {
         propiedad.setDistrito(dto.getDistrito());
         propiedad.setTipo(dto.getTipo());
         propiedad.setEstado(dto.getEstado());
-        propiedad.setImagenUrl(dto.getImagenUrl());
         propiedad.setServicios(dto.getServicios());
+
+        if (dto.getUsuario() != null && dto.getUsuario().getId() != null) {
+            Usuario usuario = new Usuario();
+            usuario.setId(dto.getUsuario().getId());
+            usuario.setNombre(dto.getUsuario().getNombre());
+            usuario.setEmail(dto.getUsuario().getEmail());
+            usuario.setRol(dto.getUsuario().getRol());
+            propiedad.setUsuario(usuario);
+        }
 
         return propiedad;
     }
@@ -38,14 +55,30 @@ public class PropiedadMapper {
         dto.setDistrito(entidad.getDistrito());
         dto.setTipo(entidad.getTipo());
         dto.setEstado(entidad.getEstado());
-        dto.setImagenUrl(entidad.getImagenUrl());
         dto.setServicios(entidad.getServicios());
 
         if (entidad.getFechaPublicacion() != null) {
             dto.setFechaPublicacion(entidad.getFechaPublicacion().toString());
         }
 
+        if (entidad.getUsuario() != null) {
+            Usuario usuario = entidad.getUsuario();
+            UsuarioResumenDTO usuarioDTO = new UsuarioResumenDTO();
+            usuarioDTO.setId(usuario.getId());
+            usuarioDTO.setNombre(usuario.getNombre());
+            usuarioDTO.setEmail(usuario.getEmail());
+            usuarioDTO.setRol(usuario.getRol());
+            dto.setUsuario(usuarioDTO);
+        }
+
+        if (entidad.getMultimedia() != null) {
+            dto.setMultimedia(
+                    entidad.getMultimedia().stream()
+                            .map(multimediaMapper::toDTO)
+                            .collect(Collectors.toList())
+            );
+        }
+
         return dto;
     }
-
 }
