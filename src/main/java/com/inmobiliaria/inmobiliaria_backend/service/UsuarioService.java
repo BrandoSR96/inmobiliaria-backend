@@ -23,8 +23,7 @@ public class UsuarioService {
     }
 
     public List<UsuarioDTO> listarUsuarios() {
-        return usuarioRepository.findAll()
-                .stream()
+        return usuarioRepository.findAll().stream()
                 .map(usuarioMapper::toDTO)
                 .collect(Collectors.toList());
     }

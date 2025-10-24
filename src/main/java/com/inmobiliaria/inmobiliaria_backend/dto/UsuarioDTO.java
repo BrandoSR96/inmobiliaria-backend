@@ -29,6 +29,6 @@ public class UsuarioDTO {
     private String password;
 
     private Rol rol;
-    private List<PropiedadResumenDTO> propiedades;
+    private List<PropiedadDTO> propiedades;
 
 }

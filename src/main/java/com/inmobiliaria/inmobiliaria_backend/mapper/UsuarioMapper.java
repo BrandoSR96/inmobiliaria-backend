@@ -4,6 +4,7 @@ import com.inmobiliaria.inmobiliaria_backend.dto.PropiedadDTO;
 import com.inmobiliaria.inmobiliaria_backend.dto.UsuarioDTO;
 import com.inmobiliaria.inmobiliaria_backend.model.Propiedad;
 import com.inmobiliaria.inmobiliaria_backend.model.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,24 +13,28 @@ import java.util.stream.Collectors;
 @Component
 public class UsuarioMapper {
 
+    @Autowired
+    private PropiedadMapper propiedadMapper;
+
+
     public UsuarioDTO toDTO(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setId(usuario.getId());
         dto.setNombre(usuario.getNombre());
         dto.setEmail(usuario.getEmail());
         dto.setPassword(usuario.getPassword());
-        dto.setRol(usuario.getRol() != null ? usuario.getRol() : null);
+        dto.setRol(usuario.getRol());
 
-        List<PropiedadResumenDTO> propiedades = usuario.getPropiedades() != null
+        List<PropiedadDTO> propiedades = usuario.getPropiedades() != null
                 ? usuario.getPropiedades().stream()
-                .map(this::toResumenPropiedad)
+                .map(propiedadMapper::toDTO) // ✅ Usa PropiedadDTO con multimedia
                 .collect(Collectors.toList())
                 : null;
 
         dto.setPropiedades(propiedades);
-
         return dto;
     }
+
 
     public Usuario toEntity(UsuarioDTO dto) {
         Usuario usuario = new Usuario();
