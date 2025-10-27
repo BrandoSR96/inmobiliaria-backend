@@ -3,6 +3,10 @@ package com.inmobiliaria.inmobiliaria_backend.controller;
 import com.inmobiliaria.inmobiliaria_backend.dto.PropiedadDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +52,19 @@ public class PropiedadController {
         propiedadService.eliminar(id);
         return ResponseEntity.ok("Propiedad eliminada correctamente");
     }
+
+    @GetMapping("/paginadas")
+    public ResponseEntity<Page<PropiedadDTO>> listarPaginadas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction) {
+
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<PropiedadDTO> propiedades = propiedadService.listarPropiedades(pageable);
+        return ResponseEntity.ok(propiedades);
+    }
+
+
 }

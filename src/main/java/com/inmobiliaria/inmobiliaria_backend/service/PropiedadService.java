@@ -6,6 +6,8 @@ import com.inmobiliaria.inmobiliaria_backend.model.Propiedad;
 import com.inmobiliaria.inmobiliaria_backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import com.inmobiliaria.inmobiliaria_backend.mapper.PropiedadMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.inmobiliaria.inmobiliaria_backend.repository.PropiedadRepository;
 
@@ -66,6 +68,11 @@ public class PropiedadService {
         Propiedad propiedad = propiedadRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Propiedad no encontrado con ID: " + id));
         propiedadRepository.deleteById(id);
+    }
+
+    public Page<PropiedadDTO> listarPropiedades(Pageable pageable) {
+        return propiedadRepository.findAll(pageable)
+                .map(propiedadMapper::toDTO);
     }
 
 
