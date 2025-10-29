@@ -21,13 +21,13 @@ public class PropiedadController {
 
     private final PropiedadService propiedadService;
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<PropiedadDTO> crear(@Valid @RequestBody PropiedadDTO dto) {
         PropiedadDTO creada = propiedadService.crearPropiedad(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creada);
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<PropiedadDTO>> listar() {
         List<PropiedadDTO> propiedades = propiedadService.listar();
         return propiedades.isEmpty()
