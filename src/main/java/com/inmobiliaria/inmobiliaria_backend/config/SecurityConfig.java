@@ -3,6 +3,7 @@ package com.inmobiliaria.inmobiliaria_backend.config;
 import com.inmobiliaria.inmobiliaria_backend.auth.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,8 +22,15 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers(HttpMethod.GET,"/api/propiedades/paginadas").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/propiedades/listar").permitAll()
+
+                        .requestMatchers(HttpMethod.POST,"/api/propiedades/crear").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/propiedades/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/propiedades/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/usuarios/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/api/usuarios/**", "/api/propiedades/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
